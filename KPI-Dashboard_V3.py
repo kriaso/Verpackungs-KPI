@@ -7,7 +7,7 @@ from datetime import datetime
 import os
 
 st.set_page_config(page_title='Logistik KPI-Dashboard', layout='wide')
-st.title('Logistik KPI-Dashboard')
+st.title('KPI-Dashboard')
 
 # Dateipfad für die CSV-Datei zum Speichern der Daten
 data_file = 'kpi_dashboard_data.csv'
