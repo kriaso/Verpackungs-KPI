@@ -6,7 +6,7 @@ import plotly.express as px
 from datetime import datetime
 
 st.set_page_config(page_title='Logistik KPI-Dashboard', layout='wide')
-st.title('Logistik KPI-Dashboard')
+st.title('KPI-Dashboard')
 
 # Globale Variable zur Speicherung der Daten
 data = pd.DataFrame()
