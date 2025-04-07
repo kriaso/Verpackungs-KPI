@@ -100,6 +100,35 @@ if submitted:
 st.subheader('Gespeicherte Daten')
 st.dataframe(data)
 
+# Gruppierte Darstellung der Oberbegriffe
+def plot_group(title, columns):
+    valid_columns = [col for col in columns if col in data.columns]
+    if not data.empty and len(valid_columns) > 0:
+        filtered_data = data[valid_columns].dropna(how='all')
+        if not filtered_data.empty:
+            fig = px.line(data, x='Kalenderwoche', y=valid_columns, title=title, markers=True)
+            st.plotly_chart(fig)
+        else:
+            st.warning(f'Keine gültigen Daten für {title} verfügbar.')
+    else:
+        st.warning(f'Spalten für {title} nicht gefunden oder leer.')
+    valid_columns = [col for col in columns if col in data.columns and data[col].notna().any()]
+    if not data.empty and len(valid_columns) > 1:
+        fig = px.line(data, x='Kalenderwoche', y=valid_columns, title=title, markers=True)
+        st.plotly_chart(fig)
+    else:
+        st.warning(f'Keine gültigen Daten für {title} verfügbar.')
+
+# Diagramme anzeigen
+plot_group('Kundenzufriedenheit', ['Pünktlichkeit', 'Kundenzufriedenheit', 'NPS'])
+plot_group('Nachhaltigkeit', ['Materialeinsparung', 'Recyclingquote', 'CO2 Fußabdruck'])
+plot_group('Sicherheit', ['Unfälle', 'Beinaheunfälle'])
+plot_group('Mitarbeiter', ['Krankheitsquote', 'Weiterempfehlungsquote'])
+plot_group('Operative Kennzahlen', ['Durchlaufzeit', 'Auslastung'])
+plot_group('Qualität', ['Schäden', 'Reklamationen', 'Fehlerquote'])
+plot_group('Zahlen', ['Marge', 'Personalaufwand', 'Materialaufwand', 'Umsatz'])
+plot_group('Effizienz', ['Geplante Stunden', 'Tatsächliche Stunden'])
+
 # Download Buttons
 st.subheader('Daten herunterladen')
 if not data.empty:
