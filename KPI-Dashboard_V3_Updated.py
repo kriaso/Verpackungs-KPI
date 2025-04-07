@@ -92,6 +92,7 @@ with st.form('daten_input'):
     st.subheader('Mitarbeiter')
     krankheitsquote = st.number_input('Krankheitsquote (%)', min_value=0.0, max_value=100.0, step=0.1)
     weiterempfehlungsquote = st.number_input('Weiterempfehlungsquote (%)', min_value=0.0, max_value=100.0, step=0.1)
+    
     submitted = st.form_submit_button('Daten hinzufügen')
  
 # Daten speichern und aktualisieren
