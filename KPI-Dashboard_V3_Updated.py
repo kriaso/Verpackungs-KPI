@@ -37,6 +37,36 @@ def load_data():
 def save_data(data):
     data.to_csv(data_file, index=False)
 
+def convert_df_to_csv(df):
+    return df.to_csv(index=False).encode('utf-8')
+
+def convert_df_to_excel(df):
+    output = io.BytesIO()
+    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+        df.to_excel(writer, index=False, sheet_name='KPI Daten')
+    return output.getvalue()
+
+st.subheader('Daten herunterladen')
+if not data.empty:
+    csv_data = convert_df_to_csv(data)
+    excel_data = convert_df_to_excel(data)
+
+    st.download_button(
+        label="CSV herunterladen",
+        data=csv_data,
+        file_name='kpi_dashboard_data.csv',
+        mime='text/csv'
+    )
+
+    st.download_button(
+        label="Excel herunterladen",
+        data=excel_data,
+        file_name='kpi_dashboard_data.xlsx',
+        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+else:
+    st.warning('Keine Daten zum Herunterladen verfügbar.')
+
 # Bestehende Daten laden
 data = load_data()
 
@@ -51,20 +81,20 @@ with st.form('daten_input'):
      # Operative Kennzahlen
     st.subheader('Operative Kennzahlen')
     durchlaufzeit = st.number_input('Durchlaufzeit', min_value=0.0, step=0.1)
-    auslastung = st.number_input('Auslastung (%)', min_value=0.0, max_value=100.0, step=0.1)
+    auslastung = st.number_input('Auslastung (%)', min_value=0.0, max_value=100.0, step=1)
 
     # Qualität
     st.subheader('Qualität')
     schäden = st.number_input('Schäden', min_value=0, step=1)
     reklamationen = st.number_input('Reklamationen', min_value=0, step=1)
-    fehlerquote = st.number_input('Fehlerquote (%)', min_value=0.0, max_value=100.0, step=0.1)
+    fehlerquote = st.number_input('Fehlerquote (%)', min_value=0.0, max_value=100.0, step=1.25)
 
     # Zahlen
     st.subheader('Zahlen')
     marge = st.number_input('Marge (%)', min_value=0.0, max_value=100.0, step=0.1)
-    personalaufwand = st.number_input('Personalaufwand', min_value=0.0, step=1.0)
-    materialaufwand = st.number_input('Materialaufwand', min_value=0.0, step=1.0)
-    umsatz = st.number_input('Umsatz', min_value=0.0, step=1.0)
+    personalaufwand = st.number_input('Personalaufwand (T€)', min_value=0.0, step=1.0)
+    materialaufwand = st.number_input('Materialaufwand (T€)', min_value=0.0, step=1.0)
+    umsatz = st.number_input('Umsatz (T€)', min_value=0.0, step=1.0)
 
     # Effizienz
     st.subheader('Effizienz')
