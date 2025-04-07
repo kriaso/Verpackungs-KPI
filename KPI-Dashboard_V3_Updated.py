@@ -48,29 +48,52 @@ current_week = datetime.now().isocalendar()[1]
 kalenderwoche = int(st.number_input('Kalenderwoche', min_value=1, max_value=53, value=current_week))
 
 with st.form('daten_input'):
+     # Operative Kennzahlen
+    st.subheader('Operative Kennzahlen')
     durchlaufzeit = st.number_input('Durchlaufzeit', min_value=0.0, step=0.1)
     auslastung = st.number_input('Auslastung (%)', min_value=0.0, max_value=100.0, step=0.1)
+
+    # Qualität
+    st.subheader('Qualität')
     schäden = st.number_input('Schäden', min_value=0, step=1)
     reklamationen = st.number_input('Reklamationen', min_value=0, step=1)
     fehlerquote = st.number_input('Fehlerquote (%)', min_value=0.0, max_value=100.0, step=0.1)
+
+    # Zahlen
+    st.subheader('Zahlen')
     marge = st.number_input('Marge (%)', min_value=0.0, max_value=100.0, step=0.1)
     personalaufwand = st.number_input('Personalaufwand', min_value=0.0, step=1.0)
     materialaufwand = st.number_input('Materialaufwand', min_value=0.0, step=1.0)
     umsatz = st.number_input('Umsatz', min_value=0.0, step=1.0)
+
+    # Effizienz
+    st.subheader('Effizienz')
     geplante_stunden = st.number_input('Geplante Stunden', min_value=0.0, step=0.25)
     tatsächliche_stunden = st.number_input('Tatsächliche Stunden', min_value=0.0, step=0.25)
+
+    # Kundenzufriedenheit
+    st.subheader('Kundenzufriedenheit')
     pünktlichkeit = st.number_input('Pünktlichkeit (%)', min_value=0.0, max_value=100.0, step=0.1)
     kundenzufriedenheit = st.number_input('Kundenzufriedenheit (%)', min_value=0.0, max_value=5.0, step=0.25)
     nps = st.number_input('Net Promoter Score', min_value=0.0, max_value=10.0, step=0.25)
+
+    # Nachhaltigkeit
+    st.subheader('Nachhaltigkeit')
     materialeinsparung = st.number_input('Materialeinsparung (%)', min_value=0.0, max_value=100.0, step=0.1)
     recyclingquote = st.number_input('Recyclingquote (%)', min_value=0.0, max_value=100.0, step=0.1)
     co2 = st.number_input('CO2 Fußabdruck', min_value=0.0, step=0.1)
+
+    # Sicherheit
+    st.subheader('Sicherheit')
     unfälle = st.number_input('Unfälle', min_value=0, step=1)
     beinaheunfälle = st.number_input('Beinaheunfälle', min_value=0, step=1)
+
+    # Mitarbeiter
+    st.subheader('Mitarbeiter')
     krankheitsquote = st.number_input('Krankheitsquote (%)', min_value=0.0, max_value=100.0, step=0.1)
     weiterempfehlungsquote = st.number_input('Weiterempfehlungsquote (%)', min_value=0.0, max_value=100.0, step=0.1)
     submitted = st.form_submit_button('Daten hinzufügen')
-
+ 
 # Daten speichern und aktualisieren
 if submitted:
     new_data = pd.DataFrame({
