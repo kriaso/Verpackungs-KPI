@@ -14,7 +14,6 @@ standort = st.sidebar.selectbox('Standort auswählen', ['Alpha', 'Bravo', 'Charl
 # Dateipfad für die CSV-Datei zum Speichern der Daten
 data_file = f'kpi_dashboard_data_{standort.lower()}.csv'
 
-st.title('Logistik KPI-Dashboard')
 
 # Dateipfad für die CSV-Datei zum Speichern der Daten
 data_file = 'kpi_dashboard_data.csv'
