@@ -100,6 +100,22 @@ if submitted:
 st.subheader('Gespeicherte Daten')
 st.dataframe(data)
 
+# Gruppierte Darstellung der Oberbegriffe
+def plot_group(title, columns):
+    if not data.empty:
+        fig = px.line(data, x='Kalenderwoche', y=columns, title=title, markers=True)
+        st.plotly_chart(fig)
+
+# Oberbegriffe mit zugehörigen Kennzahlen
+plot_group('Operative Kennzahlen', ['Durchlaufzeit', 'Auslastung'])
+plot_group('Qualität', ['Schäden', 'Reklamationen', 'Fehlerquote'])
+plot_group('Zahlen', ['Marge', 'Personalaufwand', 'Materialaufwand', 'Umsatz'])
+plot_group('Effizienz', ['Geplante Stunden', 'Tatsächliche Stunden'])
+plot_group('Kundenzufriedenheit', ['Pünktlichkeit', 'Kundenzufriedenheit', 'NPS'])
+plot_group('Nachhaltigkeit', ['Materialeinsparung', 'Recyclingquote', 'CO2 Fußabdruck'])
+plot_group('Sicherheit', ['Unfälle', 'Beinaheunfälle'])
+plot_group('Mitarbeiter', ['Krankheitsquote', 'Weiterempfehlungsquote'])
+
 # Download Buttons
 st.subheader('Daten herunterladen')
 if not data.empty:
