@@ -9,6 +9,9 @@ import os
 st.set_page_config(page_title='Logistik KPI-Dashboard', layout='wide')
 st.title('Logistik KPI-Dashboard')
 
+# Linke Seitenleiste mit Standortauswahl
+standort = st.sidebar.selectbox('Standort auswählen', ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo'])
+
 # Dateipfad für die CSV-Datei zum Speichern der Daten
 data_file = 'kpi_dashboard_data.csv'
 
