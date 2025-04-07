@@ -37,36 +37,6 @@ def load_data():
 def save_data(data):
     data.to_csv(data_file, index=False)
 
-def convert_df_to_csv(df):
-    return df.to_csv(index=False).encode('utf-8')
-
-def convert_df_to_excel(df):
-    output = io.BytesIO()
-    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-        df.to_excel(writer, index=False, sheet_name='KPI Daten')
-    return output.getvalue()
-
-st.subheader('Daten herunterladen')
-if not data.empty:
-    csv_data = convert_df_to_csv(data)
-    excel_data = convert_df_to_excel(data)
-
-    st.download_button(
-        label="CSV herunterladen",
-        data=csv_data,
-        file_name='kpi_dashboard_data.csv',
-        mime='text/csv'
-    )
-
-    st.download_button(
-        label="Excel herunterladen",
-        data=excel_data,
-        file_name='kpi_dashboard_data.xlsx',
-        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    )
-else:
-    st.warning('Keine Daten zum Herunterladen verfügbar.')
-
 # Bestehende Daten laden
 data = load_data()
 
