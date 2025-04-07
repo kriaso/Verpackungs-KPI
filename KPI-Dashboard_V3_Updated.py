@@ -6,7 +6,7 @@ from datetime import datetime
 import os
 
 st.set_page_config(page_title='Logistik KPI-Dashboard', layout='wide')
-st.title('Logistik KPI-Dashboard')
+st.title('KPI-Dashboard')
 
 # Linke Seitenleiste mit Standortauswahl
 standort = st.sidebar.selectbox('Standort auswählen', ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo'])
